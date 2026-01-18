@@ -12,11 +12,9 @@ const Home = () => {
   const { cart, addToCart, clearCart, isInCart } = useCart();
   const { user } = useAuth();
   const navigate = useNavigate();
-  const [loadingAll, setLoadingAll] = useState(false);
   const [dashboardSaveState, setDashboardSaveState] = useState("idle");
 
   const handleShowAllExercises = async () => {
-    setLoadingAll(true);
     try {
       const muscles = [
         "abdominals",
@@ -53,8 +51,6 @@ const Home = () => {
       );
 
       setExercises(uniqueExercises);
-    } finally {
-      setLoadingAll(false);
     }
   };
 
