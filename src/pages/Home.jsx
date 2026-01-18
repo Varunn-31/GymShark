@@ -15,43 +15,41 @@ const Home = () => {
   const [dashboardSaveState, setDashboardSaveState] = useState("idle");
 
   const handleShowAllExercises = async () => {
-    try {
-      const muscles = [
-        "abdominals",
-        "abductors",
-        "adductors",
-        "biceps",
-        "calves",
-        "chest",
-        "forearms",
-        "glutes",
-        "hamstrings",
-        "lats",
-        "lower_back",
-        "middle_back",
-        "neck",
-        "quadriceps",
-        "traps",
-        "triceps"
-      ];
+    const muscles = [
+      "abdominals",
+      "abductors",
+      "adductors",
+      "biceps",
+      "calves",
+      "chest",
+      "forearms",
+      "glutes",
+      "hamstrings",
+      "lats",
+      "lower_back",
+      "middle_back",
+      "neck",
+      "quadriceps",
+      "traps",
+      "triceps"
+    ];
 
-      const allExercises = [];
-      for (const muscle of muscles) {
-        const data = await fetchExercises({ muscle });
-        allExercises.push(...data);
-      }
-
-      const uniqueExercises = Array.from(
-        new Map(
-          allExercises.map((exercise) => [
-            `${exercise.name}-${exercise.muscle}-${exercise.equipment}-${exercise.type}`.toLowerCase(),
-            exercise
-          ])
-        ).values()
-      );
-
-      setExercises(uniqueExercises);
+    const allExercises = [];
+    for (const muscle of muscles) {
+      const data = await fetchExercises({ muscle });
+      allExercises.push(...data);
     }
+
+    const uniqueExercises = Array.from(
+      new Map(
+        allExercises.map((exercise) => [
+          `${exercise.name}-${exercise.muscle}-${exercise.equipment}-${exercise.type}`.toLowerCase(),
+          exercise
+        ])
+      ).values()
+    );
+
+    setExercises(uniqueExercises);
   };
 
   const cartSummary = useMemo(() => {
